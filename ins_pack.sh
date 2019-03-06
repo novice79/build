@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update -y && apt-get install -y \
-    curl libltdl-dev gnupg locales tzdata 
+    wget curl libltdl-dev gnupg locales tzdata 
      
 locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /var/run/sshd
 
@@ -24,11 +24,14 @@ wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
 # nodejs begin
 curl -sL https://deb.nodesource.com/setup_11.x | bash - 
 
-apt-get update && apt-get install -y nodejs build-essential python3-pip python-pip \
+apt-get update && apt-get install -y nodejs build-essential g++ gcc-8 g++-8 python3-pip python-pip \
 	php7.3 php7.3-bcmath php7.3-bz2 php7.3-cli php7.3-common php7.3-curl php7.3-dba php7.3-dev php7.3-enchant \
 	php7.3-fpm php7.3-gd php7.3-gmp php7.3-imap php7.3-intl php7.3-json php7.3-mbstring php7.3-mysql php7.3-odbc \
 	php7.3-opcache php7.3-pgsql php7.3-readline \
 	php7.3-soap php7.3-sqlite3 php7.3-tidy php7.3-xml php7.3-xmlrpc php7.3-zip php-redis php-igbinary php-mongodb 
+
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 
 curl -o /usr/local/bin/composer https://getcomposer.org/download/1.8.4/composer.phar && chmod +x /usr/local/bin/composer
 npm install -g pkg
