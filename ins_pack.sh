@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update -y && apt-get install -y \
-    wget curl libltdl-dev gnupg locales tzdata 
+    wget curl gnupg locales tzdata software-properties-common
      
 locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /var/run/sshd
 
@@ -18,9 +18,7 @@ useradd -ms /bin/bash david && usermod -aG sudo david ; \
 TZ=Asia/Chongqing
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # php begin
-wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
-	&& echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
-# php end
+add-apt-repository ppa:ondrej/php
 # nodejs begin
 curl -sL https://deb.nodesource.com/setup_11.x | bash - 
 
