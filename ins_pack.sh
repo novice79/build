@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update -y && apt-get install -y \
-    wget curl gnupg locales tzdata software-properties-common
+    wget curl gnupg locales tzdata software-properties-common unzip
      
 locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /var/run/sshd
 
