@@ -34,5 +34,8 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/b
 curl -o /usr/local/bin/composer https://getcomposer.org/download/1.8.4/composer.phar && chmod +x /usr/local/bin/composer
 npm install -g pkg
 pip install pyinstaller
-
+cd /tmp
+echo "console.log('Hello world');" >  app.js
+pkg -t node10-linux app.js
+rm -rf *
 rm -- "$0"
