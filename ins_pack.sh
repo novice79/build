@@ -35,7 +35,7 @@ pip3 install sanic
 
 curl -o /usr/local/bin/composer https://getcomposer.org/download/1.8.4/composer.phar && chmod +x /usr/local/bin/composer
 npm install -g pkg
-pip install pyinstaller
+pip3 install pyinstaller
 cd /tmp
 pyinstaller -F main.py
 echo "console.log('Hello world');" >  app.js
