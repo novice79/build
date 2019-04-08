@@ -31,11 +31,31 @@ apt-get update && apt-get install -y nodejs build-essential g++ gcc-8 g++-8 pyth
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 
+pip3 install sanic
+
 curl -o /usr/local/bin/composer https://getcomposer.org/download/1.8.4/composer.phar && chmod +x /usr/local/bin/composer
 npm install -g pkg
 pip install pyinstaller
 cd /tmp
+pyinstaller -F main.py
 echo "console.log('Hello world');" >  app.js
 pkg -t node10-linux app.js
-rm -rf *
+# retain python app for test?
+
+wget https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2
+tar Jxvf boost*.tar.bz2
+cd boost* && ./bootstrap.sh
+./b2 threading=multi threadapi=pthread link=static runtime-link=static install
+cd ..
+rm -rf boost*
+wget https://github.com/Kitware/CMake/releases/download/v3.14.1/cmake-3.14.1-Linux-x86_64.tar.gz
+tar zxvf cmake*.tar.gz
+cd cmake*
+cp -r bin /usr/
+cp -r share /usr/
+cp -r doc /usr/share/
+cp -r man /usr/share/
+cd ..
+rm -rf cmake-3.14.1-Linux-x86_64*
+# rm -rf *
 rm -- "$0"
