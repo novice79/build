@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update -y && apt-get install -y \
-    wget curl gnupg locales tzdata software-properties-common unzip
+    wget curl gnupg locales tzdata software-properties-common unzip upx
      
 locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /var/run/sshd
 
@@ -47,7 +47,7 @@ tar jxf boost*.tar.bz2
 cd boost_1_69_0 && ./bootstrap.sh
 ./b2 threading=multi threadapi=pthread link=static runtime-link=static install
 cd ..
-rm -rf boost*
+# rm -rf boost*
 wget https://github.com/Kitware/CMake/releases/download/v3.14.1/cmake-3.14.1-Linux-x86_64.tar.gz
 tar zxf cmake*.tar.gz
 cd cmake-3.14.1-Linux-x86_64
@@ -56,6 +56,6 @@ cp -r share /usr/
 cp -r doc /usr/share/
 cp -r man /usr/share/
 cd ..
-rm -rf cmake-3.14.1-Linux-x86_64*
-# rm -rf *
+# rm -rf cmake-3.14.1-Linux-x86_64*
+rm -rf *
 rm -- "$0"
