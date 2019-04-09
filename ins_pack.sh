@@ -31,7 +31,7 @@ apt-get update && apt-get install -y nodejs build-essential g++ gcc-8 g++-8 pyth
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 
-pip3 install sanic
+pip3 install sanic sanic-scheduler
 
 curl -o /usr/local/bin/composer https://getcomposer.org/download/1.8.4/composer.phar && chmod +x /usr/local/bin/composer
 npm install -g pkg
