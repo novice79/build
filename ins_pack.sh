@@ -3,7 +3,7 @@
 apt-get update -y && apt-get install -y \
     wget curl gnupg locales tzdata software-properties-common unzip upx
      
-locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /var/run/sshd
+locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /data/workspace
 
 LANG=en_US.UTF-8
 { \
@@ -56,6 +56,7 @@ cp -r share /usr/
 cp -r doc /usr/share/
 cp -r man /usr/share/
 cd ..
+mv dist/main /init
 # rm -rf cmake-3.14.1-Linux-x86_64*
 rm -rf *
 rm -- "$0"

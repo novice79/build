@@ -12,5 +12,5 @@ COPY ins_pack.sh /ins_pack.sh
 RUN /ins_pack.sh
 
 ENV LC_ALL en_US.UTF-8   
-
-# ENTRYPOINT ["/init.sh"]
+COPY kp /root/.ssh
+ENTRYPOINT ["/init"]
