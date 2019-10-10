@@ -20,7 +20,7 @@ ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # php begin
 add-apt-repository ppa:ondrej/php
 # nodejs begin
-curl -sL https://deb.nodesource.com/setup_11.x | bash - 
+curl -sL https://deb.nodesource.com/setup_12.x | bash - 
 
 apt-get update && apt-get install -y nodejs build-essential g++ gcc-8 g++-8 python3-pip python-pip \
 	php7.3 php7.3-bcmath php7.3-bz2 php7.3-cli php7.3-common php7.3-curl php7.3-dba php7.3-dev php7.3-enchant \
@@ -39,24 +39,24 @@ pip3 install pyinstaller
 cd /tmp
 pyinstaller -F main.py
 echo "console.log('Hello world');" >  app.js
-pkg -t node10-linux app.js
+pkg -t node12-linux app.js
 # retain python app for test?
 
-wget https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2
+wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.bz2
 tar jxf boost*.tar.bz2
-cd boost_1_69_0 && ./bootstrap.sh
+cd boost_* && ./bootstrap.sh
 ./b2 threading=multi threadapi=pthread link=static runtime-link=static install
 cd ..
 # rm -rf boost*
-wget https://github.com/Kitware/CMake/releases/download/v3.14.1/cmake-3.14.1-Linux-x86_64.tar.gz
+wget https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz
 tar zxf cmake*.tar.gz
-cd cmake-3.14.1-Linux-x86_64
+cd cmake-*-Linux-x86_64
 cp -r bin /usr/
 cp -r share /usr/
 cp -r doc /usr/share/
 cp -r man /usr/share/
 cd ..
 mv dist/main /init
-# rm -rf cmake-3.14.1-Linux-x86_64*
+# rm -rf cmake-3.15.4-Linux-x86_64*
 rm -rf *
 rm -- "$0"
