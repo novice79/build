@@ -44,18 +44,20 @@ pkg -t node12-linux app.js
 
 wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.bz2
 tar jxf boost*.tar.bz2
-cd boost_* && ./bootstrap.sh
+# can not cd *xx*xx*
+cd boost_1_71_0 && ./bootstrap.sh
 ./b2 threading=multi threadapi=pthread link=static runtime-link=static install
 cd ..
 # rm -rf boost*
 wget https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz
 tar zxf cmake*.tar.gz
-cd cmake-*-Linux-x86_64
+# can not cd cmake-*-Linux-x86_64?
+cd cmake-3.15.4-Linux-x86_64
 cp -r bin /usr/
 cp -r share /usr/
 cp -r doc /usr/share/
 cp -r man /usr/share/
-cd ..
+cd /tmp
 mv dist/main /init
 # rm -rf cmake-3.15.4-Linux-x86_64*
 rm -rf *
