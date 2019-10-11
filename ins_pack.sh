@@ -1,32 +1,28 @@
 #!/bin/bash
 
-apt-get update -y && apt-get install -y git wget curl unzip
-     
-mkdir -p /data/workspace
-
-apt-get update && apt-get install -y build-essential g++ gcc-8 g++-8 libxxf86vm-dev
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
-cd / && git clone https://github.com/Microsoft/vcpkg.git
-cd vcpkg
-./bootstrap-vcpkg.sh
-./vcpkg integrate install
-./vcpkg install boost:x64-linux dlib:x64-linux opencv:x64-linux
-# CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake"
-
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
-apt-get install -y nodejs
-npm install -g cmake-js pkg
-
 cd /tmp
-wget https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz
-tar zxf cmake*.tar.gz
-cd cmake-*-Linux-x86_64
-cp -r bin /usr/
-cp -r share /usr/
-cp -r doc /usr/share/
-cp -r man /usr/share/
+wget http://dlib.net/files/dlib-19.18.tar.bz2
+tar xvf dlib-19.18.tar.bz2
+cd dlib-19.18/
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+make install
+# opencv begin
+cd /tmp
+apt-get install -y git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+cd opencv && mkdir build && cd build
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make -j4
+make install
+# opencv end
+cd /tmp
+npm i cmake-js node-gyp -g
 rm -rf *
-cd ..
+
 
 rm -- "$0"
