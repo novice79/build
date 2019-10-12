@@ -46,7 +46,8 @@ wget https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.bz2
 tar jxf boost*.tar.bz2
 # can not cd *xx*xx*
 cd boost_1_71_0 && ./bootstrap.sh
-./b2 threading=multi threadapi=pthread link=static runtime-link=static install
+# linux can not use: link=static && runtime-link=static ?
+./b2 threading=multi threadapi=pthread install
 cd ..
 # rm -rf boost*
 wget https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz
