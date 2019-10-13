@@ -6,7 +6,7 @@ tar xvf dlib-19.18.tar.bz2
 cd dlib-19.18/
 mkdir build
 cd build
-cmake ..
+cmake -DBUILD_SHARED_LIBS=1 ..
 cmake --build . --config Release
 make install
 # opencv begin
