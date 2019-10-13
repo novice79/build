@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM novice/build:vcpkg
 LABEL maintainer="Novice <novice@piaoyun.shop>"
 
 # Get noninteractive frontend for Debian to avoid some problems:
