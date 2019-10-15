@@ -6,7 +6,9 @@ tar xvf dlib-19.18.tar.bz2
 cd dlib-19.18/
 mkdir build
 cd build
-cmake -DBUILD_SHARED_LIBS=1 ..
+# dynamic dll
+# cmake -DBUILD_SHARED_LIBS=1 ..
+cmake ..
 cmake --build . --config Release
 make install
 # opencv begin
@@ -16,7 +18,7 @@ apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng
 git clone https://github.com/opencv/opencv.git
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv && mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF ..
 make -j4
 make install
 # opencv end
