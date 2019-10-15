@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /tmp
+apt-get install -y libopenblas-dev liblapack-dev
 wget http://dlib.net/files/dlib-19.18.tar.bz2
 tar xvf dlib-19.18.tar.bz2
 cd dlib-19.18/
@@ -8,7 +9,8 @@ mkdir build
 cd build
 # dynamic dll
 # cmake -DBUILD_SHARED_LIBS=1 ..
-cmake ..
+# export CXXFLAGS="-fPIC"
+cmake -D CMAKE_CXX_FLAGS="-fPIC" ..
 cmake --build . --config Release
 make install
 # opencv begin
