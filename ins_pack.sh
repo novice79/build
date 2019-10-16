@@ -10,7 +10,7 @@ cd build
 # dynamic dll
 # cmake -DBUILD_SHARED_LIBS=1 ..
 # export CXXFLAGS="-fPIC"
-cmake -D CMAKE_CXX_FLAGS="-fPIC" ..
+cmake -D CMAKE_CXX_FLAGS="-fPIC" -DCMAKE_C_FLAGS="-fPIC" ..
 cmake --build . --config Release
 make install
 # opencv begin
