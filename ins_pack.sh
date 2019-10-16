@@ -10,7 +10,7 @@ cd build
 # dynamic dll
 # cmake -DBUILD_SHARED_LIBS=1 ..
 # export CXXFLAGS="-fPIC"
-cmake -DCMAKE_CXX_FLAGS="-fPIC" ..
+cmake -D CMAKE_CXX_FLAGS="-fPIC" ..
 cmake --build . --config Release
 make install
 # opencv begin
@@ -20,7 +20,8 @@ apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng
 git clone https://github.com/opencv/opencv.git
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv && mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF ..
+cmake -D BUILD_EXAMPLES=OFF -D BUILD_opencv_apps=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF \
+      -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -DBUILD_SHARED_LIBS=OFF ..
 make -j4
 make install
 # opencv end
