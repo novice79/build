@@ -20,9 +20,10 @@ apt-get install -y nodejs
 npm install -g cmake-js pkg
 
 cd /tmp
-wget https://github.com/Kitware/CMake/releases/download/v3.15.4/cmake-3.15.4-Linux-x86_64.tar.gz
+CV="3.16.2"
+wget "https://github.com/Kitware/CMake/releases/download/v$CV/cmake-$CV-Linux-x86_64.tar.gz"
 tar zxf cmake*.tar.gz
-cd cmake-3.15.4-Linux-x86_64
+cd cmake-$CV-Linux-x86_64
 cp -r bin /usr/
 cp -r share /usr/
 cp -r doc /usr/share/
