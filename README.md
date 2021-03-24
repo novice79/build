@@ -1,1 +1,1 @@
-﻿php, python, nodejs, c++ build env
+﻿nodejs, c++ build env
