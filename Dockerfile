@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
 
-COPY sources.list /etc/apt/sources.list
+# COPY sources.list /etc/apt/sources.list
 COPY ins_pack.sh /ins_pack.sh
 RUN /ins_pack.sh
 
