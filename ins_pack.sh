@@ -60,8 +60,9 @@ export BOOST_ROOT="/tmp/boost_$boost_ver"
 export BOOST_BUILD_PATH=$BOOST_ROOT/tools/build
 export PATH="$BOOST_ROOT:$PATH"
 cd libtorrent-rasterbar-$lt_ver
+# cxxstd=20 build failed
 b2 -j4 --user-config=/tmp/user-config.jam \
-crypto=openssl cxxstd=20 \
+crypto=openssl cxxstd=17 \
 variant=release target-os=linux \
 boost-link=static logging=off dht=on \
 threading=multi threadapi=pthread link=static runtime-link=shared \
