@@ -13,5 +13,6 @@ RUN /ins_pack.sh
 
 ENV LC_ALL en_US.UTF-8   
 
-ENTRYPOINT ["bash"]
+# ENTRYPOINT ["bash", "-l", "-c"]
+CMD ["bash"]
 # docker build -t test .
