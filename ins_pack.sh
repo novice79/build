@@ -1,8 +1,20 @@
 #!/bin/bash
 
 apt-get update -y && apt-get install -y \
-    wget curl gnupg locales tzdata apt-transport-https ca-certificates software-properties-common 
+    wget curl gnupg locales tzdata \
+    apt-transport-https ca-certificates \
+    software-properties-common sudo
 
+locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /data/workspace
+LANG=en_US.UTF-8
+{ \
+        echo "LANG=$LANG"; \
+        echo "LANGUAGE=$LANG"; \
+        echo "LC_ALL=$LANG"; \
+} > /etc/default/locale
+useradd -ms /bin/bash novice && usermod -aG sudo novice ; \
+        echo 'novice:freego' | chpasswd ; echo 'root:freego_2021' | chpasswd
+echo "novice   ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nv
 wget -O - \
 https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
 | gpg --dearmor - \
@@ -10,14 +22,7 @@ https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
 
 apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
 
-locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /data/workspace
 
-LANG=en_US.UTF-8
-{ \
-        echo "LANG=$LANG"; \
-        echo "LANGUAGE=$LANG"; \
-        echo "LC_ALL=$LANG"; \
-} > /etc/default/locale
 
 TZ=Asia/Chongqing
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -57,8 +62,12 @@ export PATH="$BOOST_ROOT:$PATH"
 cd libtorrent-rasterbar-$lt_ver
 b2 -j4 --user-config=/tmp/user-config.jam \
 crypto=openssl cxxstd=20 \
+variant=release target-os=linux \
 boost-link=static logging=off dht=on \
 threading=multi threadapi=pthread link=static runtime-link=shared \
 install
 
-# rm -- "$0"
+cd /tmp
+rm -rf *
+
+rm -- "$0"
