@@ -37,7 +37,7 @@ curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 
 apt-get update && apt-get install -y \
 nodejs build-essential \
-gcc-10 g++-10 cmake \
+gcc-10 g++-10 cmake ninja-build \
 zlib1g-dev libssl-dev \
 libsqlite3-dev libmagic-dev
 
