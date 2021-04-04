@@ -35,13 +35,13 @@ curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 # echo "deb https://deb.nodesource.com/$VERSION $DISTRO main" | tee /etc/apt/sources.list.d/nodesource.list
 # echo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" | tee -a /etc/apt/sources.list.d/nodesource.list
 
-# liblzma-dev needed for static link libmagic
+# [liblzma-dev + libbz2-dev] for static linking libmagic
 apt-get update && apt-get install -y \
 nodejs build-essential \
 gcc-10 g++-10 cmake ninja-build \
 zlib1g-dev libssl-dev \
 libsqlite3-dev libmagic-dev \
-liblzma-dev
+liblzma-dev libbz2-dev
 
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9  9  --slave /usr/bin/g++ g++ /usr/bin/g++-9
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 --slave /usr/bin/g++ g++ /usr/bin/g++-10
