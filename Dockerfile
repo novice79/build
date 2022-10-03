@@ -20,3 +20,4 @@ WORKDIR /workspace
 CMD ["sh"]
 # docker build -t novice/build:alpine .
 # docker push novice/build:alpine
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t novice/build:alpine --push .
