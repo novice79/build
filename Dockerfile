@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL maintainer="Novice <novice79@126.com>"
 
 # Get noninteractive frontend for Debian to avoid some problems:

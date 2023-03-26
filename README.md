@@ -1,1 +1,1 @@
-﻿nodejs, c++ build env
+﻿c++ cross build tools env
