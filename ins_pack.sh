@@ -3,14 +3,14 @@
 apt-get update -y && apt-get install -y \
     wget curl git gnupg locales tzdata \
     apt-transport-https ca-certificates \
-    software-properties-common sudo
+    software-properties-common sudo xz
 
 locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /data/workspace
 LANG=en_US.UTF-8
 { \
-        echo "LANG=$LANG"; \
-        echo "LANGUAGE=$LANG"; \
-        echo "LC_ALL=$LANG"; \
+    echo "LANG=$LANG"; \
+    echo "LANGUAGE=$LANG"; \
+    echo "LC_ALL=$LANG"; \
 } > /etc/default/locale
 useradd -ms /bin/bash novice && usermod -aG sudo novice ; \
         echo 'novice:freego' | chpasswd ; echo 'root:freego_2023' | chpasswd
@@ -22,11 +22,8 @@ https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
 
 apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -s -c) main"
 
-
-
 TZ=Asia/Chongqing
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 
 apt-get update \
 && apt-get install -y \
@@ -34,7 +31,22 @@ clang \
 cmake \
 ninja-build \
 meson
-
+tcs=(
+    https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/arm-ctng-linux-musleabihf-x86_64-linux.tar.xz
+    https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/armv7-ctng-linux-musleabihf-x86_64-linux.tar.xz
+    https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/aarch64-ctng-linux-musl-x86_64-linux.tar.xz
+    https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/x86_64-ctng-linux-musl-x86_64-linux.tar.xz
+)
+for i in "${tcs[@]}";do
+    curl -sL $i | tar Jxf -
+done
+curl -OL https://raw.githubusercontent.com/novice79/homebrew-gcc-cross/master/init.sh
+for i in *ctng*/;do
+    cp init.sh $i
+    cd $i 
+    chmod +x ./init.sh && ./init.sh
+    cd ..
+done
 # cd /tmp
 # boost_ver=1_81_0
 # wget "https://dl.bintray.com/boostorg/release/${boost_ver//_/.}/source/boost_$boost_ver.tar.bz2"
