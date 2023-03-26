@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 apt-get update -y && apt-get install -y \
     wget curl git gnupg locales tzdata \
     apt-transport-https ca-certificates \
-    software-properties-common sudo xz
+    software-properties-common sudo xz-utils
 
-locale-gen en_US.UTF-8 zh_CN.UTF-8 ; mkdir -p /data/workspace
+locale-gen en_US.UTF-8 zh_CN.UTF-8 
 LANG=en_US.UTF-8
 { \
     echo "LANG=$LANG"; \
@@ -46,6 +46,9 @@ for i in *ctng*/;do
     cd $i 
     chmod +x ./init.sh && ./init.sh
     cd ..
+done
+for i in */;do
+    ln -s $PWD/${i}bin/* /usr/local/bin/
 done
 # cd /tmp
 # boost_ver=1_81_0
