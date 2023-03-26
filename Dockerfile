@@ -11,7 +11,7 @@ WORKDIR /toolchains
 COPY ins_pack.sh /ins_pack.sh
 COPY fix-location.sh /fix-location.sh
 RUN /ins_pack.sh
-COPY test .
+COPY test ./test
 ENV LC_ALL en_US.UTF-8   
 
 # ENTRYPOINT ["bash", "-l", "-c"]
