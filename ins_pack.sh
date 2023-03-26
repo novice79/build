@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 apt-get update -y && apt-get install -y \
-    wget curl git gnupg locales tzdata \
+    wget curl git gnupg locales tzdata file \
     apt-transport-https ca-certificates \
     software-properties-common sudo xz-utils
 
@@ -36,6 +36,7 @@ tcs=(
     https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/armv7-ctng-linux-musleabihf-x86_64-linux.tar.xz
     https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/aarch64-ctng-linux-musl-x86_64-linux.tar.xz
     https://github.com/novice79/homebrew-gcc-cross/releases/download/v1.0.0/x86_64-ctng-linux-musl-x86_64-linux.tar.xz
+    https://github.com/novice79/build/releases/download/v1.0.0/apple-darwin21.4.tar.xz
 )
 for i in "${tcs[@]}";do
     curl -sL $i | tar Jxf -
@@ -44,9 +45,11 @@ curl -OL https://raw.githubusercontent.com/novice79/homebrew-gcc-cross/master/in
 for i in *ctng*/;do
     cp init.sh $i
     cd $i 
-    chmod +x ./init.sh && ./init.sh
+    chmod +x ./init.sh && ./init.sh && rm ./init.sh
     cd ..
 done
+rm ./init.sh
+cd apple-darwin21.4 && ./fix-location.sh && cd ..
 for i in */;do
     ln -s $PWD/${i}bin/* /usr/local/bin/
 done
