@@ -13,7 +13,7 @@ fi
 echo "PATH=$PWD/bin:$PATH" >> /etc/profile
 . /etc/profile
 arch=( 
-    arm64
+    aarch64
     x86_64
 )
 for i in "${arch[@]}";do

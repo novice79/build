@@ -49,6 +49,7 @@ for i in *ctng*/;do
     cd ..
 done
 rm ./init.sh
+mv /fix-location.sh apple-darwin21.4/
 cd apple-darwin21.4 && ./fix-location.sh && cd ..
 for i in */;do
     ln -s $PWD/${i}bin/* /usr/local/bin/
