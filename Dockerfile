@@ -16,7 +16,7 @@ ENV LC_ALL en_US.UTF-8
 COPY linux-prebuilt.sh .
 RUN ./linux-prebuilt.sh
 COPY macos-prebuilt.sh .
-RUN /macos-prebuilt.sh
+RUN ./macos-prebuilt.sh
 RUN rm -rf /tmp/*
 # ENTRYPOINT ["bash", "-l", "-c"]
 CMD ["bash"]
