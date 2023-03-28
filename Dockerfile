@@ -5,9 +5,9 @@ RUN apk update \
 	&& apk add linux-headers \
 	openssl-dev boost-dev \
 	openssl-libs-static boost-static \
-	zlib-dev bzip2-dev zstd-dev icu-dev \
+	zlib-dev bzip2-dev icu-dev \
 	nftables-dev gmp-dev \
-	zlib-static bzip2-static zstd-static icu-static \
+	zlib-static bzip2-static icu-static \
 	nftables-static libmnl-static libnftnl-dev \
 	git curl make gcc g++ ninja cmake 
 RUN cd /tmp \
