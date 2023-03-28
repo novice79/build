@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="Novice <novice79@126.com>"
-RUN sed -i 's@dl-cdn.alpinelinux.org@mirrors.ustc.edu.cn@g' /etc/apk/repositories \
-	&& apk update \
+# RUN sed -i 's@dl-cdn.alpinelinux.org@mirrors.ustc.edu.cn@g' /etc/apk/repositories
+RUN apk update \
 	&& apk add linux-headers \
 	openssl-dev boost-dev \
 	openssl-libs-static boost-static \
