@@ -18,7 +18,7 @@ for i in "${target[@]}";do
     IFS=':' read -ra t <<< "$i"
     PREFIX="/cross/${t[0]}-apple-darwin21.4"
     source "/toolchains/apple-darwin21.4/${t[0]}-env.sh"
-    mkdir -p "/tmp/_build" && cd "/tmp/_build"
+    mkdir -p "/tmp/_build" && cd "/tmp/_build" && rm -rf *
     # build zlib
     [[ -f $ZLIB_ROOT/configure.bak ]] && mv -v $ZLIB_ROOT/configure{.bak,}
     sed -i.bak "s#/usr/bin/libtool#${t[0]}-apple-darwin21.4-libtool#g" $ZLIB_ROOT/configure

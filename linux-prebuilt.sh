@@ -21,13 +21,13 @@ for i in "${target[@]}";do
     PREFIX="/cross/${t[0]}"
 
     source "/toolchains/${t[0]}/env.sh"
-    mkdir -p "/tmp/_build" && cd "/tmp/_build"
+    mkdir -p "/tmp/_build" && cd "/tmp/_build" && rm -rf *
     # build zlib
     CHOST=${t[0]} "$ZLIB_ROOT/configure" --static --prefix=$PREFIX
     make clean install
 
     # build openssl
-    [[ -f Makefile ]] && make clean
+    rm -rf /tmp/_build/*
     $OPENSSL_ROOT/Configure \
     ${t[1]} no-tests no-shared \
     no-autoload-config no-deprecated \
