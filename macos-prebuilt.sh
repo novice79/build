@@ -16,7 +16,7 @@ target=(
 
 for i in "${target[@]}";do
     IFS=':' read -ra t <<< "$i"
-    PREFIX="/cross/${t[0]}"
+    PREFIX="/cross/${t[0]}-apple-darwin21.4"
     source "/toolchains/apple-darwin21.4/${t[0]}-env.sh"
     mkdir -p "/tmp/_build" && cd "/tmp/_build"
     # build zlib

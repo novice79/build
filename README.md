@@ -9,8 +9,8 @@
 
 # Test six(4 linux, 2 macos) targets build
 
-docker run -it --rm --name cb novice/build
-cd test
-./cmake-build-test.sh
-./meson-build-test.sh
+    docker run -it --rm --name cb novice/build
+    cd test
+    ./cmake-build-test.sh
+    ./meson-build-test.sh
 

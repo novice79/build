@@ -18,10 +18,12 @@ target=(
 
 for i in "${target[@]}";do
     IFS=':' read -ra t <<< "$i"
+    PREFIX="/cross/${t[0]}"
+
     source "/toolchains/${t[0]}/env.sh"
     mkdir -p "/tmp/_build" && cd "/tmp/_build"
     # build zlib
-    CHOST=${t[0]} "$ZLIB_ROOT/configure" --static --prefix=/cross/${t[0]}
+    CHOST=${t[0]} "$ZLIB_ROOT/configure" --static --prefix=$PREFIX
     make clean install
 
     # build openssl
@@ -29,7 +31,7 @@ for i in "${target[@]}";do
     $OPENSSL_ROOT/Configure \
     ${t[1]} no-tests no-shared \
     no-autoload-config no-deprecated \
-    --cross-compile-prefix=${t[0]}- --prefix=/cross/${t[0]}
+    --cross-compile-prefix=${t[0]}- --prefix=$PREFIX
     # perl _build/configdata.pm --dump
     make -j8
     make install_sw
@@ -38,7 +40,7 @@ for i in "${target[@]}";do
     echo "using gcc :  : ${t[0]}-g++ ;" > /tmp/lb.jam
     cd $BOOST_ROOT
     [[ ! -f "./b2" ]] && ./bootstrap.sh
-    ./b2 -a --user-config=/tmp/lb.jam --prefix="/cross/${t[0]}" \
+    ./b2 -a --user-config=/tmp/lb.jam --prefix="$PREFIX" \
     --with-system --with-program_options --with-json --with-serialization --with-log \
     cxxstd=20 link=static threading=multi runtime-link=shared \
     target-os=linux address-model=${t[2]} variant=release install
