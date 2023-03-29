@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -e
+set -e
 # set -x
 cd /tmp
 ZLIB_ROOT="$PWD/zlib-1.2.13"
@@ -29,13 +29,12 @@ for i in "${target[@]}";do
     # build openssl
     rm -rf /tmp/_build/*
     $OPENSSL_ROOT/Configure \
-    ${t[1]} no-tests no-shared \
+    ${t[1]} no-tests no-shared no-module \
     no-autoload-config no-deprecated \
     --cross-compile-prefix=${t[0]}- --prefix=$PREFIX
-    # perl _build/configdata.pm --dump
     make -j8
     make install_sw
-
+    rm -rf "$PREFIX/{bin,share}"
     # build boost
     echo "using gcc :  : ${t[0]}-g++ ;" > /tmp/lb.jam
     cd $BOOST_ROOT
