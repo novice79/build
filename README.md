@@ -1,1 +1,1 @@
-﻿php, python, nodejs, c++ build env
+﻿# cross platform spa build env

@@ -1,5 +1,5 @@
-FROM novice/build:latest
-LABEL maintainer="Novice <novice@piaoyun.shop>"
+FROM novice/build:cross
+LABEL maintainer="Novice <novice79@126.com>"
 
 
 COPY ins_pack.sh /ins_pack.sh
