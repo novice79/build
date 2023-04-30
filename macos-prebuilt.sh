@@ -4,10 +4,10 @@ set -e
 cd /tmp
 ZLIB_ROOT="/tmp/zlib-1.2.13"
 OPENSSL_ROOT="/tmp/openssl-3.1.0"
-BOOST_ROOT="/tmp/boost_1_81_0"
+BOOST_ROOT="/tmp/boost_1_82_0"
 [[ -d $ZLIB_ROOT ]] || curl -sL https://zlib.net/zlib-1.2.13.tar.gz | tar zxf - -C /tmp
 [[ -d $OPENSSL_ROOT ]] || curl -sL https://www.openssl.org/source/openssl-3.1.0.tar.gz | tar zxf - -C /tmp
-[[ -d $BOOST_ROOT ]] || curl -sL https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz | tar zxf -
+[[ -d $BOOST_ROOT ]] || curl -sL https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.gz | tar zxf -
 
 target=( 
     aarch64:darwin64-arm64
@@ -39,7 +39,8 @@ for i in "${target[@]}";do
     cd $BOOST_ROOT
     [[ ! -f "./b2" ]] && ./bootstrap.sh
     ./b2 -a --user-config=/tmp/lb.jam --prefix="$PREFIX" \
-    --with-system --with-program_options --with-json --with-serialization --with-log \
+    --with-system --with-program_options --with-json \
+    --with-serialization --with-log --with-filesystem \
     cxxstd=20 link=static threading=multi runtime-link=shared \
     target-os=darwin address-model=64 variant=release install
 done
