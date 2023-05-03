@@ -1,14 +1,13 @@
 FROM alpine:latest
 LABEL maintainer="Novice <novice79@126.com>"
 # RUN sed -i 's@dl-cdn.alpinelinux.org@mirrors.ustc.edu.cn@g' /etc/apk/repositories
-# boost-dev boost-static \
+# boost-dev boost-static icu-dev icu-static bzip2-dev bzip2-static \
 RUN apk update \
 	&& apk add linux-headers \
 	openssl-dev openssl-libs-static \
-	zlib-dev bzip2-dev icu-dev \
-	nftables-dev gmp-dev \
-	zlib-static bzip2-static icu-static \
-	nftables-static libmnl-static libnftnl-dev \
+	zlib-dev zlib-static \
+	nftables-dev nftables-static gmp-dev \
+	libmnl-static libnftnl-dev \
 	git curl make gcc g++ ninja cmake 
 RUN cd /tmp \
 	&& curl -OL https://github.com/akheron/jansson/releases/download/v2.14/jansson-2.14.tar.bz2 \
@@ -16,7 +15,7 @@ RUN cd /tmp \
 	&& ./configure --enable-shared=no && make install \
 	&& cd /tmp \
 	&& curl -OL https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.gz \
-	&& tar zxf boost_1_82_0.tar.gz && cd boost_1_82_0 && bootstrap.sh \
+	&& tar zxf boost_1_82_0.tar.gz && cd boost_1_82_0 && ./bootstrap.sh \
 	&& ./b2 cxxstd=20 variant=release link=static threading=multi install \
     && cd /tmp && rm -rf *
 WORKDIR /workspace
