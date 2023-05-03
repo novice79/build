@@ -27,7 +27,7 @@ for i in "${target[@]}";do
     # build zlib
     [[ -f $ZLIB_ROOT/configure.bak ]] && mv -v $ZLIB_ROOT/configure{.bak,}
     sed -i.bak "s#/usr/bin/libtool#${t[0]}-apple-darwin21.4-libtool#g" $ZLIB_ROOT/configure
-    CHOST="${t[0]}-apple-darwin21.4" "$ZLIB_ROOT/configure" --static --prefix=$PREFIX
+    CHOST="${t[0]}-apple-darwin21.4" CFLAGS=-fPIC "$ZLIB_ROOT/configure" --static --prefix=$PREFIX
     make clean install
 
     # build openssl
@@ -43,7 +43,8 @@ for i in "${target[@]}";do
     echo "using gcc :  : ${t[0]}-apple-darwin21.4-clang++ ;" > /tmp/lb.jam
     cd $BOOST_ROOT
     [[ ! -f "./b2" ]] && ./bootstrap.sh
-    ./b2 -a --user-config=/tmp/lb.jam --prefix="$PREFIX" \
+    ./b2 -a cxxflags="-fPIE" \
+    --user-config=/tmp/lb.jam --prefix="$PREFIX" \
     --with-system --with-program_options --with-json \
     --with-serialization --with-log --with-filesystem \
     cxxstd=20 link=static threading=multi runtime-link=shared \
